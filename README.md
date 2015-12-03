@@ -7,9 +7,9 @@ Parse wikipedia dump files (xml) to wiki-talk networks.
 Download the [stand-alone jar file](https://github.com/yfiua/wiki-talk-parser/releases).
 
 ## Usage
-### v0.2.0
+### v0.2.1
 
-    $ java -jar wiki-talk-parser-0.2.0-standalone.jar *input-file* *lang* > *output-file*
+    $ java -jar wiki-talk-parser-0.2.1-standalone.jar *input-file* *lang* > *output-file*
 
 ### v0.1.0
 

@@ -1,8 +1,10 @@
 (ns wiki-talk-parser.core
   (:gen-class)
   (:require [clojure.data.xml :as xml]
+            [clojure.data.json :as json]
             [clojure.java.io :as io]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [clj-http.client :as client]))
 
 ; filter all "User_talk" pages
 (defn filter-page [rdr]
@@ -18,20 +20,33 @@
        (#(str/split % #":"))
        (last)))
 
+; get Wikipedia UID via an API call
+(defn get-user-id [user-name lang]
+  (let [url (str "https://" lang ".wikipedia.org/w/api.php?action=query&list=users&format=json&ususers=" user-name)]
+    (->> url
+         (client/get)
+         (:body)
+         (#(json/read-str % :key-fn keyword))
+         (:query)
+         (:users)
+         (first)
+         (:userid))))
+
 (defn get-contributor-ids [page]
   (let [revisions (map :content (filter #(= :revision (:tag %)) page))
         contributors (map (partial some #(when (= :contributor (:tag %)) (:content %))) revisions)]
     (for [contributor contributors]
       (first (:content (second contributor))))))  ; IDs are always in the second place in <contributor>
 
-(defn process-page [page]
-  (let [user-name (get-user-name page)]
+(defn process-page [page lang]
+  (let [user-name (get-user-id (get-user-name page) lang)]
     (doseq [contributor-id (get-contributor-ids page) :when (not (nil? contributor-id))]  ; filter out IP contributors
       (println (str user-name "\t" contributor-id)))))  ; have to use "\t" as delimiter, ffs
 
 (defn -main
   "Where everything starts happening."
   [& args]
-  (let [input-file (io/reader (first args))]
+  (let [input-file (io/reader (first args))
+        lang (second args)]   ; language of Wikipedia
     (doseq [p (filter-page input-file)]
-      (process-page p))))
+      (process-page p lang))))

@@ -17,8 +17,8 @@
 (defn get-user-name [page]
   (->> page
        (some #(when (= :title (:tag %)) (first (:content %))))
-       (#(str/split % #":"))
-       (last)))
+       (#(str/split % #":|/"))
+       (second)))
 
 ; get Wikipedia UID via an API call
 (defn get-user-id [user-name lang]
@@ -39,9 +39,9 @@
       (first (:content (second contributor))))))  ; IDs are always in the second place in <contributor>
 
 (defn process-page [page lang]
-  (let [user-name (get-user-id (get-user-name page) lang)]
+  (let [user-id (get-user-id (get-user-name page) lang)]
     (doseq [contributor-id (get-contributor-ids page) :when (not (nil? contributor-id))]  ; filter out IP contributors
-      (println (str user-name "\t" contributor-id)))))  ; have to use "\t" as delimiter, ffs
+      (println (str contributor-id "\t" user-id)))))  ; have to use "\t" as delimiter, ffs
 
 (defn -main
   "Where everything starts happening."

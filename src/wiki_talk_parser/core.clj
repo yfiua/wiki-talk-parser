@@ -23,14 +23,16 @@
 ; get Wikipedia UID via an API call
 (defn get-user-id [user-name lang]
   (let [url (str "https://" lang ".wikipedia.org/w/api.php?action=query&list=users&format=json&ususers=" user-name)]
-    (->> url
-         (client/get)
-         (:body)
-         (#(json/read-str % :key-fn keyword))
-         (:query)
-         (:users)
-         (first)
-         (:userid))))
+    (try
+      (->> url
+           (client/get)
+           (:body)
+           (#(json/read-str % :key-fn keyword))
+           (:query)
+           (:users)
+           (first)
+           (:userid))
+      (catch Exception e nil))))  ; when something went wrong
 
 (defn get-contributor-ids [page]
   (let [revisions (map :content (filter #(= :revision (:tag %)) page))

@@ -46,10 +46,54 @@
       (doseq [contributor-id (get-contributor-ids page) :when (not (nil? contributor-id))]  ; filter out IP contributors
         (println (str contributor-id "\t" user-id))))))  ; have to use "\t" as delimiter, ffs
 
+(defn with-prefix? [line prefix]
+  (let [length (count prefix)]
+    (if (< (count line) length)
+      false
+      (= prefix (subs line 0 length)))))
+
+; extract the value from "<xxx>value</xxx>"
+(defn extract-value [line prefix]
+  (let [length (count prefix)]
+    (subs line length (- (count line) (inc length)))))
+
+(defn parse [lines lang status title user-id]
+  (when (seq lines)
+    (let [line (str/trim (first lines))]
+      (condp = status
+        0   ; normal
+        (if (with-prefix? line "<title>")
+          (recur (rest lines) lang 1 (extract-value line "<title>") nil)
+          (recur (rest lines) lang 0 nil nil))
+        1   ; found a page
+        (if (with-prefix? line "<ns>")
+          (if (= "3" (extract-value line "<ns>"))
+            (recur (rest lines) lang 2 nil (get-user-id (second (str/split title #":|/")) lang))
+            (recur (rest lines) lang 0 nil nil))
+          (if (= line "</page>")
+            (recur (rest lines) lang 0 nil nil)          ; end of a page
+            (recur (rest lines) lang 1 title nil)))
+        2   ; found a "User_talk" page
+        (if (nil? user-id)
+          (recur (rest lines) lang 0 nil nil)            ; ignore IP user
+          (if (= line "<contributor>")
+            (recur (rest lines) lang 3 nil user-id)
+            (if (= line "</page>")
+              (recur (rest lines) lang 0 nil nil)         ; end of a page
+              (recur (rest lines) lang 2 nil user-id))))
+        3   ; found a contributor
+        (if (with-prefix? line "<id>")
+          (do
+            (println (str (extract-value line "<id>") "\t" user-id)) ; have to use "\t" as delimiter, ffs
+            (recur (rest lines) lang 2 nil user-id))
+          (if (= line "</contributor>")
+            (recur (rest lines) lang 2 nil user-id)     ; end of a contributor
+            (recur (rest lines) lang 3 nil user-id)))))))
+
+
 (defn -main
   "Where everything starts happening."
   [& args]
   (let [input-file (io/reader (first args))
         lang (second args)]   ; language of Wikipedia
-    (doseq [p (filter-page input-file)]
-      (process-page p lang))))
+    (parse (line-seq input-file) lang 0 nil nil)))

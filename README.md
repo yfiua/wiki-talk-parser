@@ -1,11 +1,12 @@
 # wiki-talk-parser
 
 * Parse wikipedia dump files (xml) to wiki-talk networks.
-* "Shrink" the resulted network, so it is an unweighted directed network w/o loops, like in the [SNAP wiki-Talk datasets](https://snap.stanford.edu/data/wiki-Talk.html).
+* "Shrink" the resulted network, so it is an unweighted directed network w/o loops, 
+like in the [SNAP wiki-Talk dataset](https://snap.stanford.edu/data/wiki-Talk.html).
 
 ## Installation
 
-Download the [stand-alone jar file](https://github.com/yfiua/wiki-talk-parser/releases).
+Download the [jar files](https://github.com/yfiua/wiki-talk-parser/releases).
 
 ## Usage
 ### Parse

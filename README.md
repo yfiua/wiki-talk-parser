@@ -1,27 +1,24 @@
 # wiki-talk-parser
 
-Parse wikipedia dump files (xml) to wiki-talk networks.
+* Parse wikipedia dump files (xml) to wiki-talk networks.
+* "Shrink" the resulted network, so it is an unweighted directed network w/o loops, like in the [SNAP wiki-Talk datasets](https://snap.stanford.edu/data/wiki-Talk.html).
 
 ## Installation
 
 Download the [stand-alone jar file](https://github.com/yfiua/wiki-talk-parser/releases).
 
 ## Usage
-### v0.3.0 (recommended)
+### Parse
 
-    $ java -jar wiki-talk-parser-0.3.0-standalone.jar *input-file* *lang* > *output-file*
+    $ java -jar parser.jar *input-file* *lang* > *output-file*
 
-### v0.2.1
+### Shrink
 
-    $ java -jar wiki-talk-parser-0.2.1-standalone.jar *input-file* *lang* > *output-file*
-
-### v0.1.0
-
-    $ java -jar wiki-talk-parser-0.1.0-standalone.jar *input-file* > *output-file*
+    $ java -jar shrinker.jar *input-file* > *output-file*
 
 ## Compilation
 
-    $ lein uberjar
+    $ lein with-profile parser:shrinker uberjar
 
 ## License
 

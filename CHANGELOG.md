@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## 0.4.1 - 2015-12-9
+### Removed
+- XML library dependency.
+
+### Changed
+- More idiomatic handling.
+
 ## 0.4.0 - 2015-12-8
 ### Added
 - "Shrinker"

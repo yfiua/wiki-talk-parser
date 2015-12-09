@@ -2,7 +2,6 @@
   (:gen-class)
   (:require [clojure.string :as str]
             [clojure.java.io :as io]
-            [clojure.data.xml :as xml]
             [clojure.data.json :as json]
             [clj-http.client :as client]))
 
@@ -68,6 +67,7 @@
 (defn -main
   "Where everything starts happening."
   [& args]
-  (let [input-file (io/reader (first args))
+  (let [input-file-name (first args)
         lang (second args)]   ; language of Wikipedia
-    (parse (line-seq input-file) lang 0 nil nil)))
+    (with-open [input-file (io/reader input-file-name)]
+      (parse (line-seq input-file) lang 0 nil nil))))

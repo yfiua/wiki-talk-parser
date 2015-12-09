@@ -6,7 +6,7 @@ like in the [SNAP wiki-Talk dataset](https://snap.stanford.edu/data/wiki-Talk.ht
 
 ## Installation
 
-Download the [jar files](https://github.com/yfiua/wiki-talk-parser/releases).
+Download the latest [jar files](https://github.com/yfiua/wiki-talk-parser/releases).
 
 ## Usage
 ### Parse

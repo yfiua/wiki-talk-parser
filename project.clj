@@ -1,4 +1,4 @@
-(defproject wiki-talk-parser "0.4.0"
+(defproject wiki-talk-parser "0.4.1"
   :description "Parse wikipedia dump files (xml) to wiki-talk networks."
   :url "http://github.com/yfiua/wiki-talk-parser"
   :license {:name "Eclipse Public License"
@@ -8,8 +8,7 @@
   :target-path "target/%s"
   :auto-clean false
   :profiles {:parser {:main wiki-talk-parser.core
-                      :dependencies [[org.clojure/data.xml "0.0.8"]
-                                     [org.clojure/data.json "0.2.6"]
+                      :dependencies [[org.clojure/data.json "0.2.6"]
                                      [clj-http "2.0.0"]]
                       :uberjar-name "parser.jar"}
              :shrinker {:main wiki-talk-shrinker.core

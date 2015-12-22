@@ -12,4 +12,6 @@
                                      [clj-http "2.0.0"]]
                       :uberjar-name "parser.jar"}
              :shrinker {:main wiki-talk-shrinker.core
-                        :uberjar-name "shrinker.jar"}})
+                        :uberjar-name "shrinker.jar"}
+             :group {:main wiki-user-group.core
+                     :uberjar-name "group.jar"}})

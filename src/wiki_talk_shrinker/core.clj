@@ -18,7 +18,7 @@
 (defn print-map [m]
   (doseq [e m
           v (val e)]
-    (println v "\t" (key e))))   ; the key is the target node
+    (println (str v "\t" (key e)))))   ; the key is the target node
     
 ; main
 (defn -main

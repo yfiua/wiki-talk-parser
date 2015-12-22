@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## 0.4.2 - 2015-12-22
+### Fixed
+- Shrinked network formatting.
+
 ## 0.4.1 - 2015-12-9
 ### Removed
 - XML library dependency.
@@ -10,7 +14,7 @@ All notable changes to this project will be documented in this file. This change
 
 ## 0.4.0 - 2015-12-8
 ### Added
-- "Shrinker"
+- "Shrinker".
 
 ## 0.3.0 - 2015-12-7
 ### Changed

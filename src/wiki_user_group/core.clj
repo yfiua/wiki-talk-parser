@@ -12,6 +12,10 @@
   ["reviewer"
    "autoreviewer"
    "autoreview"
+   "checkuser"
+   "oversight"
+   "arbcom"
+   "abusefilter"
    "ipblock-exempt"
    "rollbacker"
    "patroller"
@@ -45,7 +49,8 @@
           role (get-role (nth s 3))]
       (recur
         (rest users)
-        (if (or (nil? (m user-id))); (< (m user-id) role))
+        (if (or (nil? (m user-id)) (< (m user-id) role))
+;       (if (or (nil? (m user-id))); (< (m user-id) role))   ;debeg
           (merge m {user-id role})
           m)))
     m))

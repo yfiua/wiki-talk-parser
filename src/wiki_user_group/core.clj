@@ -39,7 +39,9 @@
     (.contains role-list-3 role-str)
     3
     :else
-    role-str))
+    0))
+;   role-str))
+
 
 (defn read-to-map [users m]
   (if (seq users)

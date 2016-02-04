@@ -1,5 +1,4 @@
 # wiki-talk-parser
-
 This little program can:
 
 * Parse wikipedia dump files (xml) to wiki-talk networks. Original wikipedia UIDs are remained.
@@ -7,20 +6,18 @@ This little program can:
 like in the [SNAP wiki-Talk dataset](https://snap.stanford.edu/data/wiki-Talk.html).
 * Group users according to their [roles](https://en.wikipedia.org/wiki/Wikipedia:User_access_levels).
 
-Use [stu](https://github.com/kunegis/stu) for easy lives, simply type in `stu` or:
+## Usage with stu
+Use [stu](https://github.com/kunegis/stu) for easy lives. Simply type in `stu` or:
 
     $ nohup stu -k -j 3 &
 
+Stu will automatically start downloading this program and the datasets, then parsing.
 
-If you don't use stu, then continue reading.
+## Usage without stu
+### Installation
 
-## Installation
+Manually download the [latest jar files](https://github.com/yfiua/wiki-talk-parser/releases/latest).
 
-Manually download the [latest jar files](https://github.com/yfiua/wiki-talk-parser/releases/latest), or
-
-    $ stu @download
-
-## Usage
 ### Parse
 
     $ java -jar parser.jar *input-file* *lang* > *output-file*
@@ -33,7 +30,7 @@ Manually download the [latest jar files](https://github.com/yfiua/wiki-talk-pars
 
     $ java -jar grouper.jar *input-file* > *output-file*
 
-## Compilation
+### Compilation
 
     $ lein with-profile parser:shrinker:grouper uberjar
 

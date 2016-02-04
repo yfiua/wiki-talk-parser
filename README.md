@@ -7,7 +7,12 @@ This little program can:
 like in the [SNAP wiki-Talk dataset](https://snap.stanford.edu/data/wiki-Talk.html).
 * Group users according to their [roles](https://en.wikipedia.org/wiki/Wikipedia:User_access_levels).
 
-Use [stu](https://github.com/kunegis/stu) for easy lives.
+Use [stu](https://github.com/kunegis/stu) for easy lives, simply type in `stu` or:
+
+    $ nohup stu -k -j 3 &
+
+
+If you don't use stu, then continue reading.
 
 ## Installation
 

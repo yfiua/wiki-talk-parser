@@ -1,12 +1,19 @@
 # wiki-talk-parser
 
-* Parse wikipedia dump files (xml) to wiki-talk networks.
+This little program can:
+
+* Parse wikipedia dump files (xml) to wiki-talk networks. Original wikipedia UIDs are remained.
 * "Shrink" the resulted network, so it is an unweighted directed network w/o loops, 
 like in the [SNAP wiki-Talk dataset](https://snap.stanford.edu/data/wiki-Talk.html).
+* Group users according to their [roles](https://en.wikipedia.org/wiki/Wikipedia:User_access_levels).
+
+Use [stu](https://github.com/kunegis/stu) for easy lives.
 
 ## Installation
 
-Download the latest [jar files](https://github.com/yfiua/wiki-talk-parser/releases).
+Manually download the [latest jar files](https://github.com/yfiua/wiki-talk-parser/releases/latest), or
+
+    $ stu @download
 
 ## Usage
 ### Parse
@@ -16,10 +23,14 @@ Download the latest [jar files](https://github.com/yfiua/wiki-talk-parser/releas
 ### Shrink
 
     $ java -jar shrinker.jar *input-file* > *output-file*
+    
+### Group users
+
+    $ java -jar grouper.jar *input-file* > *output-file*
 
 ## Compilation
 
-    $ lein with-profile parser:shrinker uberjar
+    $ lein with-profile parser:shrinker:grouper uberjar
 
 ## License
 

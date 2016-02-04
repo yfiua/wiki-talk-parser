@@ -1,4 +1,4 @@
-(ns wiki-user-group.core
+(ns wiki-user-grouper.core
   (:gen-class)
   (:require [clojure.set :as set]
             [clojure.string :as str]

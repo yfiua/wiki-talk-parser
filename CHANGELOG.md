@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## 0.5.0 - 2016-02-04
+### Added
+- User grouper.
+- Stu script.
+
 ## 0.4.2 - 2015-12-22
 ### Fixed
 - Shrinked network formatting.

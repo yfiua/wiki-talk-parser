@@ -1,0 +1,53 @@
+@all: [dep.wiki-talk]; 
+
+>LANGS { echo nl de zh }
+
+>dep.wiki-talk: LANGS 
+{
+    for LANG in $(cat LANGS) ; do
+        echo "$LANG-wiki-talk"
+    done
+}
+
+$LANG-wiki-talk: $LANG-wiki-stub-meta.xml parser.jar
+{
+    java -jar parser.jar $LANG-wiki-stub-meta.xml $LANG > $LANG-wiki-talk
+    touch -c $LANG-wiki-talk
+}
+
+$LANG-wiki-stub-meta.xml: $LANG-wiki-stub-meta.xml.gz
+{
+    gzip -dfvk $LANG-wiki-stub-meta.xml.gz
+    touch -c $LANG-wiki-stub-meta.xml
+}
+
+$LANG-wiki-stub-meta.xml.gz:
+{
+    wget -c https://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-stub-meta-history.xml.gz -O $LANG-wiki-stub-meta.xml.gz
+    touch -c $LANG-wiki-stub-meta.xml.gz
+}
+
+@clean:
+{
+    lein clean
+}
+
+@download: parser.jar shrinker.jar grouper.jar;
+
+parser.jar:
+{
+    wget https://github.com/yfiua/wiki-talk-parser/releases/download/latest/parser.jar
+    touch -c parser.jar
+}
+
+shrinker.jar:
+{
+    wget https://github.com/yfiua/wiki-talk-parser/releases/download/latest/shrinker.jar
+    touch -c shrinker.jar
+}
+
+grouper.jar:
+{
+    wget https://github.com/yfiua/wiki-talk-parser/releases/download/latest/grouper.jar
+    touch -c grouper.jar
+}

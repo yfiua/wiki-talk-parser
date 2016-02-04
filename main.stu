@@ -1,4 +1,4 @@
-@all: [dep.wiki-talk]; 
+@all: [dep.wiki-talk] [dep.user-group]; 
 
 >LANGS { echo nl de zh }
 
@@ -23,31 +23,52 @@ $LANG-wiki-stub-meta.xml: $LANG-wiki-stub-meta.xml.gz
 
 $LANG-wiki-stub-meta.xml.gz:
 {
-    wget -c https://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-stub-meta-history.xml.gz -O $LANG-wiki-stub-meta.xml.gz
+    wget -c https://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-stub-meta-history.xml.gz -O $LANG-wiki-stub-meta.xml.gz --tries=5
     touch -c $LANG-wiki-stub-meta.xml.gz
 }
 
-@clean:
+
+>dep.user-group: LANGS
 {
-    lein clean
+    for LANG in $(cat LANGS) ; do
+        echo "$LANG-user-group"
+    done
 }
+
+$LANG-user-group: $LANG-wiki-user_groups.sql grouper.jar
+{
+    java -jar grouper.jar $LANG-wiki-user_groups.sql > $LANG-user-group
+}
+
+$LANG-wiki-user_groups.sql: $LANG-wiki-user_groups.sql.gz
+{
+    gzip -dfvk $LANG-wiki-user_groups.sql.gz
+    touch -c $LANG-wiki-user_groups.sql
+}
+
+$LANG-wiki-user_groups.sql.gz:
+{
+    wget -c https://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-user_groups.sql.gz -O $LANG-wiki-user_groups.sql.gz --tries=5
+    touch -c $LANG-wiki-user_groups.sql.gz 
+}
+
 
 @download: parser.jar shrinker.jar grouper.jar;
 
 parser.jar:
 {
-    wget https://github.com/yfiua/wiki-talk-parser/releases/download/latest/parser.jar
+    wget -c https://github.com/yfiua/wiki-talk-parser/releases/download/latest/parser.jar
     touch -c parser.jar
 }
 
 shrinker.jar:
 {
-    wget https://github.com/yfiua/wiki-talk-parser/releases/download/latest/shrinker.jar
+    wget -c https://github.com/yfiua/wiki-talk-parser/releases/download/latest/shrinker.jar
     touch -c shrinker.jar
 }
 
 grouper.jar:
 {
-    wget https://github.com/yfiua/wiki-talk-parser/releases/download/latest/grouper.jar
+    wget -c https://github.com/yfiua/wiki-talk-parser/releases/download/latest/grouper.jar
     touch -c grouper.jar
 }

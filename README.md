@@ -7,7 +7,7 @@ like in the [SNAP wiki-Talk dataset](https://snap.stanford.edu/data/wiki-Talk.ht
 * Group users according to their [roles](https://en.wikipedia.org/wiki/Wikipedia:User_access_levels).
 
 ## Usage with stu
-Use [stu](https://github.com/kunegis/stu) for easy lives. Simply type in `stu` or:
+Use [stu](https://github.com/kunegis/stu) for easy lives. The only file you need is [main.stu](https://raw.githubusercontent.com/yfiua/wiki-talk-parser/master/main.stu). Simply type in `stu` or:
 
     $ nohup stu -k -j 3 &
 

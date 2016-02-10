@@ -1,6 +1,6 @@
 @all: [dep.wiki-talk] [dep.user-group]; 
 
->LANGS { echo nl de zh }
+>LANGS { echo ar bn br ca cy de el en eo es eu fr gl ht it ja lv nds nl oc pl pt ru sk sr sv vi zh }
 
 >dep.wiki-talk: LANGS 
 {

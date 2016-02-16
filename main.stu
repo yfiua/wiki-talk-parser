@@ -28,6 +28,8 @@ $LANG-wiki-stub-meta.xml.gz:
 }
 
 
+@user-group: [dep.user-group];
+
 >dep.user-group: LANGS
 {
     for LANG in $(cat LANGS) ; do
@@ -53,7 +55,7 @@ $LANG-wiki-user_groups.sql.gz:
 }
 
 
-@download: parser.jar shrinker.jar grouper.jar;
+@download-jars: parser.jar shrinker.jar grouper.jar;
 
 parser.jar:
 {

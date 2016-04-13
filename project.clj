@@ -1,4 +1,4 @@
-(defproject wiki-talk-parser "0.5.1"
+(defproject wiki-talk-parser "0.5.2"
   :description "Parse wikipedia dump files (xml) to wiki-talk networks."
   :url "http://github.com/yfiua/wiki-talk-parser"
   :license {:name "Eclipse Public License"

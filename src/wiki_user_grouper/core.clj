@@ -5,39 +5,19 @@
             [clojure.java.io :as io]))
 
 (def role-list-1
-  ["confirmed"
-   "autoconfirmed"])
+  ["bot"])
 
 (def role-list-2
-  ["reviewer"
-   "autoreviewer"
-   "autoreview"
-   "checkuser"
-   "oversight"
-   "arbcom"
-   "abusefilter"
-   "ipblock-exempt"
-   "rollbacker"
-   "patroller"
-   "autopatrolled"
-   "epinstructor"
-   "epcoordinator"
-   "eponline"
-   "epcampus"])
-
-(def role-list-3
   ["sysop"
    "bureaucrat"
    "founder"])
 
 (defn get-role [role-str]
   (cond
-    (.contains role-list-1 role-str)
+    (.contains role-str "bot")
     1
     (.contains role-list-2 role-str)
     2
-    (.contains role-list-3 role-str)
-    3
     :else
     0))
 ;   role-str))

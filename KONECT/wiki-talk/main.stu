@@ -18,9 +18,7 @@ wiki-talk-dataset.tar.gz:
 data/ar-wiki-talk: wiki-talk-dataset.tar.gz
 {
     tar -xvf wiki-talk-dataset.tar.gz
-    for LANG in $(cat LANGS) ; do
-        touch -c data/$LANG-wiki-talk
-    done
+    touch -c data/*
 }
 
 data/$LANG-wiki-talk: !data/ar-wiki-talk {}
@@ -30,14 +28,14 @@ out/:
     mkdir -p out
 }
 
-out/out.wiki_talk_$LANGU: !data/$LANGU-wiki-talk !out/ extr
+out/out.wiki_talk_$LANGU: !data/$LANGU-wiki-talk !out/ mktime ../mkuniq1
 {
-    ./extr data/$LANGU-wiki-talk > out/out.wiki_talk_$LANGU
+    ./mktime data/$LANGU-wiki-talk | ../mkuniq1 > out/out.wiki_talk_$LANGU
     touch out/out.wiki_talk_$LANGU
 }
 
 @clean:
 {
     rm -f LANGS *.gz dep.*
-    rm -rf data/
+    rm -rf data/ out/
 }

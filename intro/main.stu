@@ -1,0 +1,41 @@
+#
+# Stu file for generating the paper from Latex. 
+#
+
+% version 2.4
+
+@all: paper.pdf;
+
+paper.pdf: [DEP]
+{
+    rm -f *.aux *.lo? *.out *.bbl *.brf *.blg *.nl? *.ilg *.toc
+    pdflatex -file-line-error -halt-on-error -shell-escape paper.tex
+    bibtex paper
+    pdflatex -file-line-error -halt-on-error -shell-escape paper.tex
+    pdflatex -file-line-error -halt-on-error -shell-escape paper.tex
+}
+
+@clean:
+{
+    rm -f *.aux *.lo? *.out *.bbl *.brf *.blg *.nl? *.ilg *.toc
+    rm -f dep.imgs paper.pdf
+}
+
+>DEP:  texdep paper.tex
+{
+	./texdep paper.tex |
+	sed -e 's,\(^../plots/.*\)\.pdf,\1.eps,g'
+}
+
+texdep:  -o ../../kunegis/papers/texdep
+{
+	if ! [ -r ../../kunegis/papers/texdep ] ; then
+		if [ -r texdep ] ; then
+			touch -c texdep
+		else
+			exit 1
+		fi
+		exit 0
+	fi
+	cp ../../kunegis/papers/texdep ./
+}

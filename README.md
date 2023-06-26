@@ -12,6 +12,8 @@ Use [stu](https://github.com/kunegis/stu) for easy lives. The only file you need
     $ nohup stu -k -j 3 &
 
 Stu will automatically start downloading this program and the datasets, then parsing.
+The parameter `-j` defines the number of jobs that will run in parallel.
+For downloading, more than 3 is not recommended.
 
 ## Usage without stu
 ### Installation

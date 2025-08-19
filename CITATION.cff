@@ -1,0 +1,20 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: wiki-talk-parser
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Jun
+    family-names: Sun
+    email: JunSun@gesis.org
+    affiliation: GESIS - Leibniz-Institut für Sozialwissenschaften
+    orcid: 'https://orcid.org/0000-0002-4789-7316'
+identifiers:
+  - type: url
+    value: 'https://github.com/yfiua/wiki-talk-parser'
+repository-code: 'https://github.com/yfiua/wiki-talk-parser'
+license: EPL-1.0
